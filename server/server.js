@@ -1,29 +1,33 @@
-import 'dotenv/config'
-import express from 'express'
-import cors from 'cors'
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
 import connectDB from './configs/mongodb.js';
 import userRouter from './routes/userRoutes.js';
 import imageRouter from './routes/imageRoutes.js';
 
-// App Config
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4000;
 const app = express();
+
 await connectDB();
 
-app.use(express.json());
+// CORS - generally should come before routes
 app.use(cors());
 
-// SPECIAL: For Clerk webhooks, use express.raw for signature validation
-app.use('/api/users/webhooks', express.raw({ type: 'application/json' }));
+// Use JSON parser for all routes except webhook route
+app.use(express.json());
 
+// Raw parser for Clerk webhooks (must come before userRouter if webhooks are in userRouter)
+app.use('/api/user/webhooks', express.raw({ type: 'application/json' }))
 
+// Test root
 app.get('/', (req, res) => {
-    res.send("API Working")
-})
-app.use('/api/user', userRouter);
+  res.send('API Working');
+});
+
+// Routers
+app.use('/api/user', userRouter);    // userRouter to include: /webhooks POST handler for webhook
 app.use('/api/image', imageRouter);
 
-
-app.listen(PORT, ()=>{
-    console.log("Server running on PORT " + PORT)
-})
+app.listen(PORT, () => {
+  console.log('Server running on PORT ' + PORT);
+});
