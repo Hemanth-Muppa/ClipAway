@@ -13,6 +13,9 @@ await connectDB();
 app.use(express.json());
 app.use(cors());
 
+// SPECIAL: For Clerk webhooks, use express.raw for signature validation
+app.use('/api/users/webhooks', express.raw({ type: 'application/json' }));
+
 
 app.get('/', (req, res) => {
     res.send("API Working")

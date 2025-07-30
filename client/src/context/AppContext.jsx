@@ -8,7 +8,7 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
 
-    const [credit, setCredit] = useState(false);
+    const [credit, setCredit] = useState(0);
     const [image, setImage] = useState(false);
     const [resultImage, setResultImage] = useState(false);
 
@@ -25,7 +25,7 @@ const AppContextProvider = (props) => {
     const loadCreditsData = async () => {
         try {
             const token = await getToken();
-            const {data} = await axios.get(backendUrl+'api/user/credits', {Headers:{token}});
+            const {data} = await axios.get(backendUrl+'/api/user/credits',{headers:{token}})
             if(data.success) {
                 setCredit(data.credits);
                 console.log(data.credits);

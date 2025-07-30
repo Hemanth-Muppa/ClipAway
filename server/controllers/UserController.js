@@ -1,5 +1,5 @@
-import { Webhook } from "svix"
-import userModel from "../models/userModel.js"
+import { Webhook } from "svix";
+import userModel from "../models/userModel.js";
 import "dotenv/config";
 
 // API Controller Functin to manage Clerk User with database
@@ -7,6 +7,7 @@ import "dotenv/config";
 
 const clerkWebhooks = async (req, res) => {
   try {
+    console.log("Webhook endpoint triggered!");
     // create a svix instance with clerk webhook secret.
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
@@ -30,7 +31,7 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url,
         };
         await userModel.create(userData);
-        res.json({});  // Acknowledge the webhook
+        res.json({}); // Acknowledge the webhook
         break;
       }
 
@@ -55,29 +56,36 @@ const clerkWebhooks = async (req, res) => {
       default:
         break;
     }
-  } 
-  catch (error) {
+  } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
   }
 };
 
 // API Controller function to get user available credits data
-const userCredits = async (req,res) =>{
-    try {
-        const {clerkId} = req.body
-        const userData = await userModel.findOne({clerkId})
-        res.json({
-            success:true , 
-            credits:userData.creditBalance
-        });
-    } catch (error) {
-        console.log(error.message)
-        res.json({
-            success:false, 
-            message:error.message
-        });
-    }
-}
+const userCredits = async (req, res) => {
+  try {
+    const { clerkId } = req.body;
+    const userData = await userModel.findOne({ clerkId });
 
-export {clerkWebhooks, userCredits}
+    if (!userData) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found with the provided clerkId.",
+      });
+    }
+
+    res.json({
+      success: true,
+      credits: userData.creditBalance,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export { clerkWebhooks, userCredits };
