@@ -13,11 +13,12 @@ await connectDB();
 // CORS - generally should come before routes
 app.use(cors());
 
-// Use JSON parser for all routes except webhook route
-app.use(express.json());
 
 // Raw parser for Clerk webhooks (must come before userRouter if webhooks are in userRouter)
 app.use('/api/user/webhooks', express.raw({ type: 'application/json' }))
+
+// Use JSON parser for all routes except webhook route
+app.use(express.json());
 
 // Test root
 app.get('/', (req, res) => {
