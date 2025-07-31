@@ -22,14 +22,30 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between mx-4 py-3 lg:mx-44">
       <Link to="/">
-        {" "}
-        <img className="w-22 sm:w-44" src={assets.logo} alt="" />{" "}
+        <div className="flex items-center space-x-4">
+          {/* Logo image */}
+          <img
+            src={assets.backg} // Replace with your actual image import/path
+            alt="ClipAway Logo"
+            className="w-9 h-8"
+          />
+          {/* App name */}
+          <h1 className="text-xl sm:text-4xl font-semibold tracking-tight bg-gradient-to-r from-blue-600 via-fuchsia-600 to-pink-500 bg-clip-text text-transparent">
+            ClipAway
+          </h1>
+        </div>
       </Link>
+
       {isSignedIn ? (
         <div className="flex items-center gap-2 sm:gap-3">
-          <button onClick = {() => navigate('/buy')} className="flex items-center gap-2 bg-blue-100 px-4 sm:px-7 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all duration-700">
-            <img className = "w-5" src={assets.credit_icon} alt="" />
-            <p className="text-xs sm:text-sm font-medium text-gray-600">Credits: {credit}</p>
+          <button
+            onClick={() => navigate("/buy")}
+            className="flex items-center gap-2 bg-blue-100 px-4 sm:px-7 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all duration-700"
+          >
+            <img className="w-5" src={assets.credit_icon} alt="" />
+            <p className="text-xs sm:text-sm font-medium text-gray-600">
+              Credits: {credit}
+            </p>
           </button>
           <p className="text-gray-600 max-sm:hidden">Hi, {user.fullName}</p>
           <UserButton />

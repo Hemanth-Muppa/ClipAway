@@ -7,10 +7,10 @@ const Header = () => {
   const { removeBg } = useContext(AppContext);
 
   return (
-    <div className="flex items-center justify-between max-sm:flex-col-reverse gap-y-10 px-4 mt-10 lg:px-44 sm-mt-20">
+    <div className="flex items-center justify-between max-sm:flex-col-reverse gap-y-10 px-4 mt-20 lg:px-44 sm-mt-20">
       {/* left side */}
       <div>
-        <h1 className="text-4xl xl:text-5xl 2xl:text-6xl font-extrabold text-gray-800 leading-tight">
+        <h1 className="text-4xl xl:text-5xl 2xl:text-6xl font-extrabold text-gray-700 leading-tight">
           Instantly remove <br className="max-md:hidden" />{" "}
           <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
             image backgrounds
@@ -44,7 +44,7 @@ const Header = () => {
 
       {/* right side */}
       <div className="w-full max-w-md">
-        <img src={assets.header_img} alt="" />
+        <img src={assets.sample} className = "w-100 h-100 object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-101 hover:shadow-xl cursor-pointer" alt="" />
       </div>
     </div>
   );
