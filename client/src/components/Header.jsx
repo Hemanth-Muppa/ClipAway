@@ -21,7 +21,7 @@ const Header = () => {
         <p className="my-6 text-[15px] text-gray-600">
           Upload your photo and get a transparent background in seconds using
           our <br className="max-sm:hidden" />
-          AI-powered background removal tool — fast, free, and hassle-free.
+          AI-powered background removal tool — fast and hassle-free.
         </p>
 
         <div>
@@ -44,7 +44,7 @@ const Header = () => {
 
       {/* right side */}
       <div className="w-full max-w-md">
-        <img src={assets.sample} className = "w-100 h-100 object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-101 hover:shadow-xl cursor-pointer" alt="" />
+        <img src={assets.sample} className = "w-100 h-100 object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-101 hover:shadow-xl" alt="" />
       </div>
     </div>
   );

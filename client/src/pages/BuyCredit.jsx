@@ -83,12 +83,12 @@ const BuyCredit = () => {
             <p className="mt-3 font-semibold">{item.id}</p>
             <p className="text-sm">{item.desc}</p>
             <p className="mt-6">
-              <span className="text-3xl font-medium">${item.price}</span>/
+              <span className="text-3xl font-medium">₹{item.price}</span>/
               {item.credits} credit{item.credits > 1 ? "s" : ""}
             </p>
             <button
               onClick={() => paymentRazorpay(item.id)}
-              className="w-full bg-gray-800 text-white mt-8 text-sm rounded-md py-2.5 min-w-52"
+              className="w-full bg-gray-800 text-white mt-8 text-sm rounded-md py-2.5 min-w-52 cursor-pointer"
             >
               Purchase
             </button>
